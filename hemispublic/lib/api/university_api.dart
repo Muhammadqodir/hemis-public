@@ -15,11 +15,14 @@ class UniversityApi {
   Future<ApiResponce<University>> getUniverData() async {
     try {
       print("${baseUrl}public/university-profile");
-      http.Response response = await http.get(
-        Uri.parse('${baseUrl}public/university-profile'),
-      );
+      http.Response response = await http
+          .get(
+            Uri.parse('${baseUrl}public/university-profile'),
+          )
+          .timeout(
+            const Duration(seconds: 3),
+          );
       Map<String, dynamic> data = jsonDecode(response.body);
-      print(data);
       if (data["code"] != 200) {
         return ApiResponce.error(
           title: "Server Error: ${data["code"]}",
@@ -30,16 +33,19 @@ class UniversityApi {
         return ApiResponce.success(data: University.fromJson(data["data"]));
       }
     } catch (e, s) {
-      print(e);
       return ApiResponce.error(title: e.toString(), message: s.toString());
     }
   }
 
   Future<ApiResponce<Students>> getStudents() async {
     try {
-      http.Response response = await http.get(
-        Uri.parse('${baseUrl}public/stat-student'),
-      );
+      http.Response response = await http
+          .get(
+            Uri.parse('${baseUrl}public/stat-student'),
+          )
+          .timeout(
+            const Duration(seconds: 3),
+          );
       Map<String, dynamic> data = jsonDecode(response.body);
       if (data["code"] != 200) {
         return ApiResponce.error(
@@ -56,9 +62,13 @@ class UniversityApi {
 
   Future<ApiResponce<Employers>> getEmployers() async {
     try {
-      http.Response response = await http.get(
-        Uri.parse('${baseUrl}public/stat-employee'),
-      );
+      http.Response response = await http
+          .get(
+            Uri.parse('${baseUrl}public/stat-employee'),
+          )
+          .timeout(
+            const Duration(seconds: 3),
+          );
       Map<String, dynamic> data = jsonDecode(response.body);
       if (data["code"] != 200) {
         return ApiResponce.error(
@@ -75,9 +85,13 @@ class UniversityApi {
 
   Future<ApiResponce<Infrastructure>> getInfrastructure() async {
     try {
-      http.Response response = await http.get(
-        Uri.parse('${baseUrl}public/stat-structure'),
-      );
+      http.Response response = await http
+          .get(
+            Uri.parse('${baseUrl}public/stat-structure'),
+          )
+          .timeout(
+            const Duration(seconds: 3),
+          );
       Map<String, dynamic> data = jsonDecode(response.body);
       if (data["code"] != 200) {
         return ApiResponce.error(

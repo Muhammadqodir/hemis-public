@@ -9,16 +9,20 @@ class HemisPubicApi {
 
   static Future<ApiResponce<List<University>>> getUniversities() async {
     try {
-      http.Response response = await http.get(
-        Uri.parse('${baseUrl}public/university-list'),
-      );
+      http.Response response = await http
+          .get(
+            Uri.parse('${baseUrl}public/university-list'),
+          )
+          .timeout(
+            const Duration(seconds: 3),
+          );
       Map<String, dynamic> data = jsonDecode(response.body);
       if (data["code"] != 200) {
         return ApiResponce.error(
           title: "Server Error: ${data["code"]}",
           message: data["error"].toString(),
         );
-      }else{
+      } else {
         List<University> universities = [];
         for (Map<String, dynamic> item in data["data"]) {
           universities.add(University.fromJson(item));

@@ -26,21 +26,24 @@ class _CustomLayoutState extends State<CustomLayout> {
         child: Stack(
           children: [
             SafeArea(
-              child: MyListView(
-                onTop: (v) {
-                  setState(() {
-                    showShadow = !v;
-                  });
-                },
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 50,
-                      bottom: 20,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 62),
+                child: MyListView(
+                  onTop: (v) {
+                    setState(() {
+                      showShadow = !v;
+                    });
+                  },
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 0,
+                        bottom: 20,
+                      ),
+                      child: widget.child,
                     ),
-                    child: widget.child,
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             Positioned(

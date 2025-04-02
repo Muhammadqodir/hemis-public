@@ -13,8 +13,10 @@ class MyAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 100),
+    return Container(
+      height: 62,
+      // duration: const Duration(milliseconds: 50),
+      // curve: Curves.linear,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         boxShadow: [
@@ -28,7 +30,7 @@ class MyAppBar extends StatelessWidget {
         ],
         color: Theme.of(context).scaffoldBackgroundColor,
       ),
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
       child: SafeArea(
         bottom: false,
         child: child,
