@@ -1,7 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoadingWidget extends StatelessWidget {
-  const LoadingWidget({super.key});
+  const LoadingWidget({
+    super.key,
+    this.title = "Loading...",
+  });
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +15,7 @@ class LoadingWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Center(
-          child: CircularProgressIndicator(),
+          child: CupertinoActivityIndicator(),
         ),
         const SizedBox(height: 10),
         Text(

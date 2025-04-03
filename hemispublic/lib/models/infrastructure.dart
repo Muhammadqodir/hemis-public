@@ -3,9 +3,9 @@ import 'dart:convert';
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class Infrastructure {
   Map<String, dynamic> groups;
-  Map<String, dynamic> auditoriums;
-  Map<String, dynamic> specialities;
-  Map<String, dynamic> departments;
+  List<dynamic> auditoriums;
+  List<dynamic> specialities;
+  List<dynamic> departments;
   Infrastructure({
     required this.groups,
     required this.auditoriums,
@@ -27,14 +27,14 @@ class Infrastructure {
       groups: Map<String, dynamic>.from(
         (map['groups'] as Map<String, dynamic>),
       ),
-      auditoriums: Map<String, dynamic>.from(
-        (map['auditoriums'] as Map<String, dynamic>),
+      auditoriums: List<dynamic>.from(
+        (map['auditoriums'] as List<dynamic>),
       ),
-      specialities: Map<String, dynamic>.from(
-        (map['specialities'] as Map<String, dynamic>),
+      specialities: List<dynamic>.from(
+        (map['specialities'] as List<dynamic>),
       ),
-      departments: Map<String, dynamic>.from(
-        (map['departments'] as Map<String, dynamic>),
+      departments: List<dynamic>.from(
+        (map['departments'] as List<dynamic>),
       ),
     );
   }

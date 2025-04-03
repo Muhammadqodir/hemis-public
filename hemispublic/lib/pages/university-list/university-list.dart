@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hemispublic/cubit/theme_cubit.dart';
 import 'package:hemispublic/cubit/university_list_cubit.dart';
 import 'package:hemispublic/layouts/custom-layout.dart';
+import 'package:hemispublic/pages/dashboard/dashboard.dart';
 import 'package:hemispublic/utils/dialogs.dart';
 import 'package:hemispublic/utils/themes.dart';
+import 'package:hemispublic/widgets/error.dart';
 import 'package:hemispublic/widgets/ontapscale.dart';
 import 'package:hemispublic/widgets/university-list-item.dart';
 
@@ -54,24 +56,12 @@ class UniversityListPage extends StatelessWidget {
         if (state is UniversityListError) {
           return Scaffold(
             body: SafeArea(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      state.title,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Text(state.message),
-                    CupertinoButton(
-                      onPressed: () {
-                        context.read<UniversityListCubit>().fetchUniversities();
-                      },
-                      child: const Text("Retry"),
-                    ),
-                  ],
-                ),
+              child: CustomErrorWidget(
+                message: state.message,
+                title: state.title,
+                onRetry: () {
+                  context.read<UniversityListCubit>().fetchUniversities();
+                },
               ),
             ),
           );
@@ -117,7 +107,18 @@ class UniversityListPage extends StatelessWidget {
             child: Column(
               children: state.universities
                   .map(
-                    (university) => UniversityListItem(university: university),
+                    (university) => UniversityListItem(
+                      university: university,
+                      onTap: () {
+                        Navigator.of(context).push(
+                          CupertinoPageRoute(
+                            builder: (context) => DashboardPage(
+                              university: university,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   )
                   .toList(),
             ),

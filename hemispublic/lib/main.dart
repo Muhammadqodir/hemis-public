@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hemispublic/cubit/employers_cubit.dart';
+import 'package:hemispublic/cubit/infrastructure_cubit.dart';
+import 'package:hemispublic/cubit/students_cubit.dart';
 import 'package:hemispublic/cubit/theme_cubit.dart';
 import 'package:hemispublic/cubit/university_list_cubit.dart';
 import 'package:hemispublic/pages/university-list/university-list.dart';
@@ -21,6 +24,15 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => UniversityListCubit()..fetchUniversities(),
+        ),
+        BlocProvider(
+          create: (context) => StudentsCubit(),
+        ),
+        BlocProvider(
+          create: (context) => EmployersCubit(),
+        ),
+        BlocProvider(
+          create: (context) => InfrastructureCubit(),
         ),
       ],
       child: MaterialApp(
