@@ -25,21 +25,26 @@ class UniversityListItem extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: WebNetworkImage(
-              url: university.logo ?? "undefined",
-              onFail: Image.asset(
-                "assets/no-image.png",
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
-              ),
-              onLoading: const SizedBox(
-                width: 100,
-                height: 100,
-                child: Center(
-                  child: CupertinoActivityIndicator(),
-                ),
-              ),
+            child: Image.network(
+              university.logo ?? "undefined",
+              errorBuilder: (_, __, ___) {
+                return Image.asset(
+                  "assets/no-image.png",
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                );
+              },
+              loadingBuilder: (_, child, loadingProgress) {
+                if (loadingProgress == null) return child;
+                return const SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Center(
+                    child: CupertinoActivityIndicator(),
+                  ),
+                );
+              },
               width: 100,
               height: 100,
               fit: BoxFit.cover,

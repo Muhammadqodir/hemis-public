@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 
 class MyListView extends StatelessWidget {
-  MyListView({
+  const MyListView({
     super.key,
     required this.children,
     required this.onTop,
+    required this.controller,
   });
 
-  final ScrollController _controller = ScrollController();
+  final ScrollController controller;
   final List<Widget> children;
   final Function(bool) onTop;
 
@@ -15,7 +16,7 @@ class MyListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return NotificationListener<ScrollUpdateNotification>(
       onNotification: (notification) {
-        if (_controller.position.pixels == notification.metrics.pixels) {
+        if (controller.position.pixels == notification.metrics.pixels) {
           if (notification.metrics.pixels > 0) {
             onTop(false);
           }
@@ -27,7 +28,7 @@ class MyListView extends StatelessWidget {
         return true;
       },
       child: ListView(
-        controller: _controller,
+        controller: controller,
         physics: const AlwaysScrollableScrollPhysics(
           parent: BouncingScrollPhysics(),
         ),

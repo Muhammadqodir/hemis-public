@@ -47,87 +47,81 @@ class _DashboardPageState extends State<DashboardPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          elevation: 0.5,
-          leading: OnTapScaleAndFade(
-            onTap: (() {
-              Navigator.pop(context);
-            }),
-            child: Icon(
-              CupertinoIcons.back,
-              color: Theme.of(context).textTheme.titleLarge!.color,
-            ),
+        elevation: 0.5,
+        leading: OnTapScaleAndFade(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            CupertinoIcons.back,
+            color: Theme.of(context).textTheme.titleLarge!.color,
           ),
-          titleSpacing: 0,
-          title: Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.asset(
-                  "assets/logo.png",
-                  width: 40,
-                  height: 40,
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  "eCampus Statistics",
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ),
-            ],
-          ),
-          actions: [
-            OnTapScaleAndFade(
-              onTap: () {
-                context.read<ThemeCubit>().toggleTheme();
-              },
-              child: Icon(
-                context.read<ThemeCubit>().state is ThemeDark
-                    ? CupertinoIcons.sun_max
-                    : CupertinoIcons.moon,
+        ),
+        titleSpacing: 0,
+        title: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: Image.network(
+                widget.university.logo!,
+                width: 40,
+                height: 40,
               ),
             ),
-            // const SizedBox(width: 12),
-            // OnTapScaleAndFade(
-            //   onTap: () {
-            //     context.read<UniversityListCubit>().fetchUniversities();
-            //   },
-            //   child: const Icon(CupertinoIcons.refresh),
-            // )
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                widget.university.name!,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            ),
           ],
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          bottom: TabBar(
-            controller: tabController,
-            labelPadding: EdgeInsets.zero,
-            overlayColor: MaterialStateColor.transparent,
-            tabs: [
-              IndicatorTab(
-                onTap: () {
-                  tabController.animateTo(0);
-                },
-                title: "Talabalar",
-                color: Colors.red,
-                icon: CupertinoIcons.person_3,
-              ),
-              IndicatorTab(
-                onTap: () {
-                  tabController.animateTo(1);
-                },
-                title: "Ishchilar(O'qituvchilar)",
-                color: Colors.red,
-                icon: CupertinoIcons.group_solid,
-              ),
-              IndicatorTab(
-                onTap: () {
-                  tabController.animateTo(2);
-                },
-                title: "Infratuzilma",
-                color: Colors.red,
-                icon: CupertinoIcons.circle_grid_hex,
-              ),
-            ],
-          )),
+        ),
+        actions: [
+          OnTapScaleAndFade(
+            onTap: () {
+              context.read<ThemeCubit>().toggleTheme();
+            },
+            child: Icon(
+              context.read<ThemeCubit>().state is ThemeDark
+                  ? CupertinoIcons.sun_max
+                  : CupertinoIcons.moon,
+            ),
+          ),
+        ],
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        bottom: TabBar(
+          controller: tabController,
+          labelPadding: EdgeInsets.zero,
+          overlayColor: MaterialStateColor.transparent,
+          tabs: [
+            IndicatorTab(
+              onTap: () {
+                tabController.animateTo(0);
+              },
+              title: "Talabalar",
+              color: Colors.red,
+              icon: CupertinoIcons.chart_pie,
+            ),
+            IndicatorTab(
+              onTap: () {
+                tabController.animateTo(1);
+              },
+              title: "Ishchilar(O'qituvchilar)",
+              color: Colors.red,
+              icon: CupertinoIcons.chart_pie,
+            ),
+            IndicatorTab(
+              onTap: () {
+                tabController.animateTo(2);
+              },
+              title: "Infratuzilma",
+              color: Colors.red,
+              icon: CupertinoIcons.chart_pie,
+            ),
+          ],
+        ),
+      ),
       body: SafeArea(
         child: TabBarView(
           controller: tabController,
@@ -135,6 +129,7 @@ class _DashboardPageState extends State<DashboardPage>
             parent: AlwaysScrollableScrollPhysics(),
           ),
           children: [
+            // SizedBox(),
             BlocBuilder<StudentsCubit, StudentsState>(
               builder: (context, state) {
                 if (state is StudentsLoading) {
@@ -221,7 +216,7 @@ class _DashboardPageState extends State<DashboardPage>
                   child: Text("Undefined state"),
                 );
               },
-            )
+            ),
           ],
         ),
       ),

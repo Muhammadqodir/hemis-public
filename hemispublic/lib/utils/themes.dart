@@ -5,6 +5,19 @@ const grayColor = Color(0xFF666666);
 const colorAccent = Color.fromARGB(255, 230, 246, 244);
 const lightGray = Color(0xFFcccccc);
 
+const List<Color> fixedColors = [
+  Color(0xFF1E88E5),
+  Color(0xFFD32F2F),
+  Color(0xFF43A047),
+  Color(0xFFFBC02D),
+  Color(0xFF8E24AA),
+  Color(0xFF3949AB),
+  Color(0xFF00ACC1),
+  Color(0xFFFB8C00),
+  Color(0xFF6D4C41),
+  Color(0xFF546E7A),
+];
+
 BoxShadow shadow = BoxShadow(
   color: Colors.grey.withOpacity(0.2),
   spreadRadius: 0.4,

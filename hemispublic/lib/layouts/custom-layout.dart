@@ -7,10 +7,12 @@ class CustomLayout extends StatefulWidget {
     super.key,
     required this.child,
     required this.title,
+    required this.controller,
   });
 
   final Widget title;
   final Widget child;
+  final ScrollController controller;
 
   @override
   State<CustomLayout> createState() => _CustomLayoutState();
@@ -29,6 +31,7 @@ class _CustomLayoutState extends State<CustomLayout> {
               child: Padding(
                 padding: const EdgeInsets.only(top: 62),
                 child: MyListView(
+                  controller: widget.controller,
                   onTop: (v) {
                     setState(() {
                       showShadow = !v;

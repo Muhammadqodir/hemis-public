@@ -31,18 +31,9 @@ class IndicatorTab extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  width: 24,
-                  height: 24,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: color,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Icon(
-                    icon,
-                    color: Colors.white,
-                  ),
+                Icon(
+                  icon,
+                  color: Theme.of(context).textTheme.bodyMedium!.color,
                 ),
                 const SizedBox(
                   width: 4,
